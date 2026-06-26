@@ -20,7 +20,10 @@ jobs:
         run: pip install -r requirements.txt
       
       - name: Create credentials file
-        run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
+        run: |
+          echo "$GOOGLE_CREDENTIALS" > credentials.json
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       
       - name: Run price tracker
         run: python main.py
